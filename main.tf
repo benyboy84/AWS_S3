@@ -5,6 +5,5 @@ resource "random_integer" "rand" {
 
 resource "aws_s3_bucket" "logs_bucket" {
   bucket        = "s3conseilsticc${random_integer.rand.result}"
-  acl           = "private"
   force_destroy = true
 }
