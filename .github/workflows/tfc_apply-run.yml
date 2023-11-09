@@ -3,8 +3,8 @@
 # `Terraform Cloud Apply Run` job uses `checkout` to download the content of the repository. It runs
 # `hashicorp/tfc-workflows-github/actions/upload-configuration` to creates a configuration version
 # and uploads the directory containing files for a specified Terraform Cloud Workspace. Then, it
-# performs an API driven run in Terraform Cloud, using a configuration version and the workspace's 
-# current variables. 
+# performs an API driven run in Terraform Cloud, using a configuration version and the workspace's
+# current variables.
 #
 # Documentation
 # - https://github.com/actions/checkout
