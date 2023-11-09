@@ -1,0 +1,61 @@
+# This workflow runs manually.
+#
+# `Terraform Cloud Apply Run` job uses `checkout` to download the content of the repository. It runs
+# `hashicorp/tfc-workflows-github/actions/upload-configuration` to creates a configuration version
+# and uploads the directory containing files for a specified Terraform Cloud Workspace. Then, it
+# performs an API driven run in Terraform Cloud, using a configuration version and the workspace's 
+# current variables. 
+#
+# Documentation
+# - https://github.com/actions/checkout
+# - https://github.com/hashicorp/tfc-workflows-github/tree/main/actions/upload-configuration
+# - https://github.com/hashicorp/tfc-workflows-github/tree/main/actions/create-run
+#
+# Prerequisites:
+# - A Terraform Cloud workspace
+# - A Terraform Cloud API token with required permissions
+#
+# Terraform Cloud user API token stored as a GitHub secret (e.g. TF_API_TOKEN) in the repository.
+#   Documentation:
+#     - https://www.terraform.io/docs/cloud/users-teams-organizations/api-tokens.html
+#     - https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets
+
+name: Terraform Cloud Apply Run
+
+on:  # yamllint disable-line rule:truthy
+  workflow_dispatch:
+    inputs:
+      runner:
+        description: Label of the runner to use.
+        required: false
+        default: ubuntu-latest
+        type: string
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  terraform-cloud-apply-run:
+    name: Terraform Cloud Apply Run
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      TF_CLOUD_ORGANIZATION: "ConseilsTI"
+      TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+      TF_WORKSPACE: "AWS_S3"
+      CONFIG_DIRECTORY: "./"
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.4
+        id: upload
+        with:
+          workspace: ${{ env.TF_WORKSPACE }}
+          directory: ${{ env.CONFIG_DIRECTORY }}
+
+      - uses: hashicorp/tfc-workflows-github/actions/create-run@v1.0.4
+        id: create-run
+        with:
+          workspace: ${{ env.TF_WORKSPACE }}
+          configuration_version: ${{ steps.upload.outputs.configuration_version_id }}
