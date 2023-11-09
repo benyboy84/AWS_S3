@@ -1,4 +1,3 @@
-# AWS_S3
 <!-- BEGIN_TF_DOCS -->
 # AWS S3 Bucket
 
