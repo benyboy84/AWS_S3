@@ -9,7 +9,6 @@ would provision and manage the configuration using Terraform code (IaC).
 AWS access are managed by IAM policies attached to an IAM identities
 (users, groups of users, or roles) or AWS resources.
 
-
 To manage the resources from that code, use an one of the supported
 authentication by AWS provider.
 
