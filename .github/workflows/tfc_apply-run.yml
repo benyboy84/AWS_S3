@@ -48,13 +48,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.4
+      - uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.1.1
         id: upload
         with:
           workspace: ${{ env.TF_WORKSPACE }}
           directory: ${{ env.CONFIG_DIRECTORY }}
 
-      - uses: hashicorp/tfc-workflows-github/actions/create-run@v1.0.4
+      - uses: hashicorp/tfc-workflows-github/actions/create-run@v1.1.1
         id: create-run
         with:
           workspace: ${{ env.TF_WORKSPACE }}
