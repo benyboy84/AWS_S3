@@ -47,7 +47,7 @@ jobs:
       TF_WORKSPACE: "AWS_S3"
       CONFIG_DIRECTORY: "./"
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - uses: hashicorp/tfc-workflows-github/actions/upload-configuration@v1.0.4
         id: upload

@@ -49,6 +49,8 @@ The following requirements are needed by this module:
 
 - <a name="requirement_aws"></a> [aws](#requirement\_aws) (5.23.1)
 
+- <a name="requirement_random"></a> [random](#requirement\_random) (3.5.1)
+
 ## Modules
 
 No modules.
@@ -66,7 +68,7 @@ No optional inputs.
 The following resources are used by this module:
 
 - [aws_s3_bucket.logs_bucket](https://registry.terraform.io/providers/hashicorp/aws/5.23.1/docs/resources/s3_bucket) (resource)
-- [random_integer.rand](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/integer) (resource)
+- [random_integer.rand](https://registry.terraform.io/providers/hashicorp/random/3.5.1/docs/resources/integer) (resource)
 
 ## Outputs
 
